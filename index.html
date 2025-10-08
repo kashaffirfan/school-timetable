@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Timetable System</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Library for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 School Timetable System</h1>
+
+    <!-- Section 1 -->
+    <section class="card">
+      <h2>Where is this teacher right now?</h2>
+      <input id="teacherInput" placeholder="Enter teacher name (e.g. Miss Ayesha)" />
+      <button onclick="checkTeacher()">Check</button>
+      <p id="result"></p>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="card">
+      <h2>View Class Timetable</h2>
+      <input id="classInput" placeholder="Enter class name (e.g. 8A)" />
+      <button onclick="showClass()">Show</button>
+      <div id="classOutput"></div>
+      <button id="downloadClassBtn" class="hidden" onclick="downloadPDF('classOutput', 'Class_Timetable')">📄 Download PDF</button>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="card">
+      <h2>View Teacher Timetable</h2>
+      <input id="teacherScheduleInput" placeholder="Enter teacher name" />
+      <button onclick="showTeacher()">Show</button>
+      <div id="teacherOutput"></div>
+      <button id="downloadTeacherBtn" class="hidden" onclick="downloadPDF('teacherOutput', 'Teacher_Timetable')">📄 Download PDF</button>
+    </section>
+  </div>
+
+  <script>
+    function checkTeacher() {
+      const name = document.getElementById('teacherInput').value.trim();
+      document.getElementById('result').innerHTML = findTeacherNow(name);
+    }
+
+    function showClass() {
+      const name = document.getElementById('classInput').value.trim();
+      const data = getClassTimetable(name);
+      document.getElementById('classOutput').innerHTML = renderTable(data, "class");
+      document.getElementById('downloadClassBtn').classList.toggle('hidden', data.length === 0);
+    }
+
+    function showTeacher() {
+      const name = document.getElementById('teacherScheduleInput').value.trim();
+      const data = getTeacherTimetable(name);
+      document.getElementById('teacherOutput').innerHTML = renderTable(data, "teacher");
+      document.getElementById('downloadTeacherBtn').classList.toggle('hidden', data.length === 0);
+    }
+
+    // 🧾 Convert table to PDF
+    function downloadPDF(elementId, filename) {
+      const element = document.getElementById(elementId);
+      const opt = {
+        margin: 0.5,
+        filename: `${filename}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>

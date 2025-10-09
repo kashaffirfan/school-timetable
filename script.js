@@ -4,14 +4,14 @@ let selectedTeacherSchedule = "";
 const allTeachers = [...new Set(timetableData.flatMap(c => c.schedule.map(s => s.teacher)))];
 const allClasses = timetableData.map(c => c.className);
 
-// ---------------- Render Table ----------------
-// ---------------- Render Table ----------------
-function renderTable(data) {
+function renderTable(data, showClassName = false) {
   if (!data || data.length === 0) return "<p>No data found.</p>";
 
   let html = "";
   data.forEach(cls => {
-    //html += `<h3>${cls.className}</h3>`;
+    if (showClassName) {
+      html += `<h3>Class: ${cls.className}</h3>`;
+    }
     html += `<p><em>Same timetable from Monday to Friday</em></p>`;
     html += `<div class="table-container"><table>`;
     html += "<tr><th>Time</th><th>Subject</th><th>Teacher</th></tr>";
@@ -29,7 +29,6 @@ function renderTable(data) {
 
   return html;
 }
-
 
 // ---------------- Get Class Timetable ----------------
 function getClassTimetable(name) {
@@ -164,84 +163,49 @@ function enableKeyboardNavigation(inputId, ulId, actionFuncName, selectionVarNam
   }
 }
 
-function downloadPDF(elementId, filename, title = "") {
+function downloadPDF(elementId, filename, teacherName = "") {
   const element = document.getElementById(elementId);
   if (!element || element.innerHTML.trim() === "") {
     alert("No timetable to download!");
     return;
   }
 
-  const clone = document.createElement("div");
+  // Wrapper for centering content
+  const wrapper = document.createElement("div");
+  wrapper.style.textAlign = "center"; // center all content
 
-  // Add logo at the top
-  const logo = document.createElement("img");
-  logo.src = "logo.jpeg"; // your logo path
-  logo.style.width = "120px";
-  logo.style.display = "block";
-  logo.style.margin = "0 auto 15px";
-  clone.appendChild(logo);
-
-  // Add title (Teacher/Class)
-  if (title) {
-    const titleEl = document.createElement("h2");
-    titleEl.textContent = title; // teacher name shown here
-    titleEl.style.textAlign = "center";
-    titleEl.style.color = "#003366";
-    titleEl.style.marginBottom = "15px";
-    clone.appendChild(titleEl);
+  // Teacher name heading
+  if (teacherName) {
+    const heading = document.createElement("h2");
+    heading.textContent = teacherName;
+    heading.style.marginBottom = "15px";
+    wrapper.appendChild(heading);
   }
 
-  // Append table/content
-  const tableClone = element.cloneNode(true);
-  clone.appendChild(tableClone);
+  // Table wrapper to center table
+  const tableWrapper = document.createElement("div");
+  tableWrapper.style.display = "inline-block"; // important to center table
+  tableWrapper.appendChild(element.cloneNode(true));
 
-  // Styles for PDF
-  clone.querySelectorAll("*").forEach(el => {
-    el.style.border = "none";
-    el.style.boxShadow = "none";
-    el.style.background = "transparent";
-  });
-
-  clone.querySelectorAll("table").forEach(table => {
-    table.style.margin = "0 auto";
-    table.style.width = "auto";
-    table.style.borderCollapse = "collapse";
-    table.style.border = "1px solid black";
-
-    table.querySelectorAll("th").forEach(th => {
-      th.style.border = "1px solid black";
-      th.style.padding = "5px 8px";
-      th.style.background = "#2563eb";
-      th.style.color = "white";
-      th.style.fontWeight = "bold";
-      th.style.textAlign = "center";
-    });
-
-    table.querySelectorAll("td").forEach(td => {
-      td.style.border = "1px solid black";
-      td.style.padding = "5px 8px";
-      td.style.textAlign = "center";
-    });
-  });
-
-  const wrapper = document.createElement("div");
-  wrapper.style.padding = "20px";
-  wrapper.appendChild(clone);
+  wrapper.appendChild(tableWrapper);
   document.body.appendChild(wrapper);
 
-  html2pdf().set({
-    margin: [0.5, 0.5, 0.5, 0.5],
-    filename: `${filename}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 3, useCORS: true, scrollY: -window.scrollY, windowWidth: document.body.scrollWidth },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-  }).from(wrapper).save().then(() => {
-    document.body.removeChild(wrapper);
-  });
+  html2pdf()
+    .set({
+      margin: 0.5,
+      filename: `${filename}.pdf`,
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+      pagebreak: { mode: ['css', 'legacy'] }
+    })
+    .from(wrapper)
+    .save()
+    .then(() => {
+      document.body.removeChild(wrapper);
+    });
 }
 
-
-// ---------------- Actions ----------------// ---------------- Actions ----------------
+// ---------------- Actions ----------------/
 window.checkTeacherNow = () => {
   const input = document.getElementById("teacherInput").value.trim();
   const name = selectedTeacherNow || input;
@@ -262,7 +226,7 @@ window.showTeacherSchedule = () => {
   const data = getTeacherTimetable(name);
 
   // Render table normally
-  document.getElementById("teacherOutput").innerHTML = renderTable(data);
+  document.getElementById("teacherOutput").innerHTML = renderTable(data, true);
 
   // Show download button if data exists
   document.getElementById("downloadTeacherBtn").classList.toggle("hidden", data.length === 0);
@@ -279,7 +243,7 @@ window.showTeacherSchedule = () => {
 window.showClassTable = () => {
   const className = document.getElementById("classInput").value;
   const data = getClassTimetable(className);
-  document.getElementById("classOutput").innerHTML = renderTable(data);
+  document.getElementById("classOutput").innerHTML = renderTable(data, false);
   document.getElementById("downloadClassBtn").classList.toggle("hidden", data.length === 0);
 };
 

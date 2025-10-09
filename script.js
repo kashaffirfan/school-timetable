@@ -233,7 +233,7 @@ function downloadPDF(elementId, filename, title = "") {
     margin: [0.5, 0.5, 0.5, 0.5],
     filename: `${filename}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+    html2canvas: { scale: 3, useCORS: true, scrollY: -window.scrollY, windowWidth: document.body.scrollWidth },
     jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
   }).from(wrapper).save().then(() => {
     document.body.removeChild(wrapper);

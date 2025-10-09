@@ -5,74 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>School Timetable System</title>
   <link rel="stylesheet" href="style.css" />
+
   <!-- Library for PDF export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+
 </head>
 <body>
   <div class="container">
-    <h1>📚 School Timetable System</h1>
-
-    <!-- Section 1 -->
-    <section class="card">
-      <h2>Where is this teacher right now?</h2>
-      <input id="teacherInput" placeholder="Enter teacher name (e.g. Miss Ayesha)" />
-      <button onclick="checkTeacher()">Check</button>
-      <p id="result"></p>
-    </section>
-
-    <!-- Section 2 -->
-    <section class="card">
-      <h2>View Class Timetable</h2>
-      <input id="classInput" placeholder="Enter class name (e.g. 8A)" />
-      <button onclick="showClass()">Show</button>
-      <div id="classOutput"></div>
-      <button id="downloadClassBtn" class="hidden" onclick="downloadPDF('classOutput', 'Class_Timetable')">📄 Download PDF</button>
-    </section>
-
-    <!-- Section 3 -->
-    <section class="card">
-      <h2>View Teacher Timetable</h2>
-      <input id="teacherScheduleInput" placeholder="Enter teacher name" />
-      <button onclick="showTeacher()">Show</button>
-      <div id="teacherOutput"></div>
-      <button id="downloadTeacherBtn" class="hidden" onclick="downloadPDF('teacherOutput', 'Teacher_Timetable')">📄 Download PDF</button>
-    </section>
+  <!-- School Logo -->
+  <div class="logo-container">
+    <img src="logo.jpg" alt="School Logo" class="school-logo" />
   </div>
 
+  <h1 class="main-heading">School Timetable System</h1>
+
+  <!-- Section 1: Teacher Now -->
+  <section class="card" style="position:relative;">
+    <h2>Where is this teacher right now?</h2>
+    <input id="teacherInput" placeholder="Enter teacher name" autocomplete="off"/>
+    <ul id="teacherSuggestions" class="suggestions"></ul>
+    <button id="checkTeacherBtn">Check</button>
+    <p id="result"></p>
+  </section>
+
+  <!-- Section 2: Class Timetable -->
+  <section class="card" style="position:relative;">
+    <h2>View Class Timetable</h2>
+    <input id="classInput" placeholder="Enter class name or Student Name" autocomplete="off"/>
+    <ul id="classSuggestions" class="suggestions"></ul>
+    <button id="showClassBtn">Show</button>
+    <button id="downloadClassBtn" class="hidden">📄 Download PDF</button>
+    <div id="classOutput"></div>
+  </section>
+
+  <!-- Section 3: Teacher Timetable -->
+  <section class="card" style="position:relative;">
+    <h2>View Teacher Timetable</h2>
+    <input id="teacherScheduleInput" placeholder="Enter teacher name" autocomplete="off"/>
+    <ul id="teacherSuggestions2" class="suggestions"></ul>
+    <button id="showTeacherBtn">Show</button>
+    <button id="downloadTeacherBtn" class="hidden">📄 Download PDF</button>
+    <div id="teacherOutput"></div>
+  </section>
+</div>
+
+  <!-- Include JS at the end to ensure DOM is loaded -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
   <script>
-    function checkTeacher() {
-      const name = document.getElementById('teacherInput').value.trim();
-      document.getElementById('result').innerHTML = findTeacherNow(name);
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      // ---------------- Teacher Now ----------------
+      document.getElementById("checkTeacherBtn").addEventListener("click", () => {
+        const name = document.getElementById("teacherInput").value.trim();
+        document.getElementById("result").textContent = name ? findTeacherNow(name) : "Please enter a teacher name.";
+      });
 
-    function showClass() {
-      const name = document.getElementById('classInput').value.trim();
-      const data = getClassTimetable(name);
-      document.getElementById('classOutput').innerHTML = renderTable(data, "class");
-      document.getElementById('downloadClassBtn').classList.toggle('hidden', data.length === 0);
-    }
+      // ---------------- Class Timetable ----------------
+      document.getElementById("showClassBtn").addEventListener("click", () => {
+        const name = document.getElementById("classInput").value.trim();
+        const data = getClassTimetable(name);
+        document.getElementById("classOutput").innerHTML = renderTable(data);
+        document.getElementById("downloadClassBtn").classList.toggle("hidden", data.length === 0);
+      });
 
-    function showTeacher() {
-      const name = document.getElementById('teacherScheduleInput').value.trim();
-      const data = getTeacherTimetable(name);
-      document.getElementById('teacherOutput').innerHTML = renderTable(data, "teacher");
-      document.getElementById('downloadTeacherBtn').classList.toggle('hidden', data.length === 0);
-    }
+      // ---------------- Teacher Timetable ----------------
+      document.getElementById("showTeacherBtn").addEventListener("click", () => {
+        const name = document.getElementById("teacherScheduleInput").value.trim();
+        const data = getTeacherTimetable(name);
+        document.getElementById("teacherOutput").innerHTML = renderTable(data);
+        document.getElementById("downloadTeacherBtn").classList.toggle("hidden", data.length === 0);
+      });
 
-    // 🧾 Convert table to PDF
-    function downloadPDF(elementId, filename) {
-      const element = document.getElementById(elementId);
-      const opt = {
-        margin: 0.5,
-        filename: `${filename}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save();
-    }
+      // ---------------- PDF Download ----------------
+      document.getElementById("downloadClassBtn").addEventListener("click", () => {
+        downloadPDF("classOutput", "Class_Timetable");
+      });
+      document.getElementById("downloadTeacherBtn").addEventListener("click", () => {
+        downloadPDF("teacherOutput", "Teacher_Timetable");
+      });
+
+      // ---------------- Autocomplete ----------------
+      document.getElementById("teacherInput").addEventListener("input", e => showTeacherSuggestions(e.target.value));
+      document.getElementById("teacherScheduleInput").addEventListener("input", e => showTeacherSuggestions2(e.target.value));
+      document.getElementById("classInput").addEventListener("input", e => showClassSuggestions(e.target.value));
+    });
   </script>
 </body>
 </html>

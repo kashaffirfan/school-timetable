@@ -1,6 +1,7 @@
+/* ---------- Body & Global ---------- */
 body {
   font-family: "Poppins", sans-serif;
-  background: #eef3fc;
+  background: #cfbeff; /* soft light background */
   color: #333;
   margin: 0;
   padding: 0;
@@ -10,27 +11,46 @@ body {
   max-width: 900px;
   margin: 30px auto;
   padding: 20px;
+  background-color: #f9faff; /* subtle card background */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-h1 {
+/* ---------- Logo & Header ---------- */
+.logo-container {
   text-align: center;
-  color: #1d4ed8;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
+.school-logo {
+  width: 120px;
+  max-width: 30vw;
+  height: auto;
+  display: inline-block;
+}
+
+.main-heading {
+  text-align: center;
+  color: #260046; /* primary dark color */
+  margin-bottom: 25px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* ---------- Cards ---------- */
 .card {
   background: white;
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  margin-bottom: 25px;
+  border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .card h2 {
-  color: #2563eb;
+  color: #35053a; /* secondary blue */
   margin-bottom: 10px;
 }
 
+/* ---------- Inputs ---------- */
 input {
   padding: 8px 10px;
   border-radius: 5px;
@@ -40,8 +60,9 @@ input {
   margin-bottom: 10px;
 }
 
+/* ---------- Buttons ---------- */
 button {
-  background: #2563eb;
+  background: #3f083a;
   color: white;
   border: none;
   padding: 8px 14px;
@@ -49,16 +70,49 @@ button {
   cursor: pointer;
   font-weight: 500;
   margin-top: 5px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background: #1e40af;
+  background: #6d00ac;
 }
 
 .hidden {
   display: none;
 }
 
+/* ---------- Suggestions List ---------- */
+.suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #cbd5e1;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 70%;
+  position: absolute;
+  background: white;
+  z-index: 10;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.suggestions li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #e0f2fe;
+}
+
+.suggestions li.no-match {
+  cursor: default;
+  color: gray;
+  background-color: #f9f9f9;
+}
+
+/* ---------- Table Styling ---------- */
 .table-container {
   overflow-x: auto;
   margin-top: 10px;
@@ -71,13 +125,13 @@ table {
 }
 
 th, td {
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
+  padding: 8px 10px;
+  border: 1px solid #330d49;
   text-align: center;
 }
 
 th {
-  background-color: #2563eb;
+  background-color: #330d49;
   color: white;
 }
 
@@ -89,12 +143,27 @@ tr:hover {
   background-color: #e0f2fe;
 }
 
+h3 {
+  margin: 10px 0 5px;
+}
+
+/* ---------- Output Containers ---------- */
+#classOutput, #teacherOutput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  background-color: white;
+  overflow: visible; /* ensure full table visible in PDF */
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 600px) {
   .container {
     padding: 10px;
   }
 
-  input, button {
+  input, button, .suggestions {
     width: 100%;
     margin-top: 5px;
   }
@@ -103,17 +172,4 @@ tr:hover {
     font-size: 14px;
     padding: 6px;
   }
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 15px;
-}
-th, td {
-  border: 1px solid #333;
-  padding: 5px 10px;
-  text-align: left;
-}
-h3 {
-  margin: 10px 0 5px;
 }

@@ -1,348 +1,170 @@
-const timetableData = {
-  "Kareem Sultani": [
-    {
-      "day": "Monday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Tuesday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Wednesday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Thursday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Friday",
-      "schedule": [
-        { "time": "08:30 – 09:45", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "09:45 – 10:00", "subject": "Break", "teacher": "" },
-        { "time": "10:00 – 11:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "11:00 – 12:00", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    }
-  ],
-
-  "Khawaja Subhan": [
-    {
-      "day": "Monday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Tuesday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Wednesday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Thursday",
-      "schedule": [
-        { "time": "08:30 – 10:15", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "10:15 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Lunch Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    },
-    {
-      "day": "Friday",
-      "schedule": [
-        { "time": "08:30 – 09:45", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "09:45 – 10:00", "subject": "Break", "teacher": "" },
-        { "time": "10:00 – 11:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "11:00 – 12:00", "subject": "English", "teacher": "Ms. Kiran Akhtar Mahvish" }
-      ]
-    }
-  ],
-
-  "Dilawar Junaid": [
-    {
-      "day": "Monday",
-      "schedule": [
-        { "time": "08:00 – 09:00", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "09:00 – 10:00", "subject": "English", "teacher": "O Juniors" },
-        { "time": "10:00 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "Computer Science", "teacher": "O Juniors" }
-      ]
-    },
-    {
-      "day": "Tuesday",
-      "schedule": [
-        { "time": "08:00 – 09:00", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "09:00 – 10:00", "subject": "English", "teacher": "O Juniors" },
-        { "time": "10:00 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "Computer Science", "teacher": "O Juniors" }
-      ]
-    },
-    {
-      "day": "Wednesday",
-      "schedule": [
-        { "time": "08:00 – 09:00", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "09:00 – 10:00", "subject": "English", "teacher": "O Juniors" },
-        { "time": "10:00 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "Computer Science", "teacher": "O Juniors" }
-      ]
-    },
-    {
-      "day": "Thursday",
-      "schedule": [
-        { "time": "08:00 – 09:00", "subject": "Urdu", "teacher": "Ms. Gulshan" },
-        { "time": "09:00 – 10:00", "subject": "English", "teacher": "O Juniors" },
-        { "time": "10:00 – 10:30", "subject": "Break", "teacher": "" },
-        { "time": "10:30 – 12:00", "subject": "Math", "teacher": "Ms. Ayesha Maryam" },
-        { "time": "12:00 – 12:30", "subject": "Break", "teacher": "" },
-        { "time": "12:45 – 01:45", "subject": "Computer Science", "teacher": "O Juniors" }
-      ]
-    }
-  ],
-
-  "Promoted Students": [
+const timetableData = [
+  // Kareem Sultani
   {
-    "day": "Monday",
-    "schedule": [
-      { "time": "08:00 – 09:15", "subject": "English", "teacher": "Ms. Zoya" },
-      { "time": "09:15 – 09:30", "subject": "Break", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Math", "teacher": "Sir Bilal & Ms. Zainab" },
-      { "time": "10:40 – 11:10", "subject": "Break", "teacher": "" },
-      { "time": "11:10 – 12:30", "subject": "Urdu", "teacher": "Ms. Palwasha" },
-      { "time": "12:30 – 01:40", "subject": "Science", "teacher": "Ms. Sidra" }
+    className: "Kareem Sultani",
+    schedule: [
+      { day: "Monday", time: "08:30 – 10:15", subject: "Urdu", teacher: "Ms. Gulshan" },
+      { day: "Monday", time: "10:15 – 10:30", subject: "Break", teacher: "" },
+      { day: "Monday", time: "10:30 – 12:00", subject: "Math", teacher: "Ms. Ayesha Maryam" },
+      { day: "Monday", time: "12:00 – 12:30", subject: "Lunch Break", teacher: "" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "English", teacher: "Ms. Kiran Akhtar" },
     ]
   },
+
+  // Khawaja Subhan
   {
-    "day": "Tuesday",
-    "schedule": [
-      { "time": "08:00 – 09:15", "subject": "English", "teacher": "Ms. Zoya" },
-      { "time": "09:15 – 09:30", "subject": "Break", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Math", "teacher": "Sir Bilal & Ms. Zainab" },
-      { "time": "10:40 – 11:10", "subject": "Break", "teacher": "" },
-      { "time": "11:10 – 12:30", "subject": "Urdu", "teacher": "Ms. Palwasha" },
-      { "time": "12:30 – 01:40", "subject": "Science", "teacher": "Ms. Sidra" }
+    className: "Khawaja Subhan",
+    schedule: [
+      { day: "Monday", time: "08:30 – 10:15", subject: "Urdu", teacher: "Ms. Gulshan" },
+      { day: "Monday", time: "10:15 – 10:30", subject: "Break", teacher: "" },
+      { day: "Monday", time: "10:30 – 12:00", subject: "Math", teacher: "Ms. Ayesha Maryam" },
+      { day: "Monday", time: "12:00 – 12:30", subject: "Lunch Break", teacher: "" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "English", teacher: "Ms. Kiran Akhtar" },
     ]
   },
+
+  // Dilawar Junaid
   {
-    "day": "Wednesday",
-    "schedule": [
-      { "time": "08:00 – 09:15", "subject": "English", "teacher": "Ms. Zoya" },
-      { "time": "09:15 – 09:30", "subject": "Break", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Math", "teacher": "Sir Bilal & Ms. Zainab" },
-      { "time": "10:40 – 11:10", "subject": "Break", "teacher": "" },
-      { "time": "11:10 – 12:30", "subject": "Urdu", "teacher": "Ms. Palwasha" },
-      { "time": "12:30 – 01:40", "subject": "Science", "teacher": "Ms. Sidra" }
-    ]
+    className: "Dilawar Junaid",
+    schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "Urdu", teacher: "Ms. Gulshan" },
+      { day: "Monday", time: "09:00 – 10:00", subject: "English", teacher: "Ms. Kiran Akhtar" },
+      { day: "Monday", time: "10:00 – 10:30", subject: "Break", teacher: "" },
+      { day: "Monday", time: "10:30 – 12:00", subject: "Math", teacher: "Ms. Ayesha Maryam" },
+      { day: "Monday", time: "12:00 – 12:30", subject: "Break", teacher: "" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" },
+      ]
   },
-  {
-    "day": "Thursday",
-    "schedule": [
-      { "time": "08:00 – 09:15", "subject": "English", "teacher": "Ms. Zoya" },
-      { "time": "09:15 – 09:30", "subject": "Break", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Math", "teacher": "Sir Bilal & Ms. Zainab" },
-      { "time": "10:40 – 11:10", "subject": "Break", "teacher": "" },
-      { "time": "11:10 – 12:30", "subject": "Urdu", "teacher": "Ms. Palwasha" },
-      { "time": "12:30 – 01:40", "subject": "Science", "teacher": "Ms. Sidra" }
+
+];
+// Promoted Students
+timetableData.push({
+  className: "Promoted Students",
+  schedule: [
+    { day: "Monday", time: "08:00 – 09:15", subject: "English", teacher: "Ms. Zoya" },
+    { day: "Monday", time: "09:15 – 09:30", subject: "Break", teacher: "" },
+    { day: "Monday", time: "09:30 – 10:30", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
+    { day: "Monday", time: "10:40 – 11:10", subject: "Break", teacher: "" },
+    { day: "Monday", time: "11:10 – 12:30", subject: "Urdu", teacher: "Ms. Palwasha" },
+    { day: "Monday", time: "12:30 – 01:40", subject: "Science", teacher: "Ms. Sidra" }
     ]
-  }
-]
-};
+});
 
 // O Juniors A
-timetableData["O Juniors A"] = [
-  {
-    "day": "Monday",
-    "schedule": [
-      { "time": "08:00 – 09:30", "subject": "Math", "teacher": "Teacher Supervised Practice" },
-      { "time": "09:30 – 10:30", "subject": "Accounting/Biology", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "Break", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "Math", "teacher": "Syllabus Coverage" },
-      { "time": "12:45 – 01:45", "subject": "Business/Chemistry/Computer", "teacher": "" }
-    ]
-  }
-];
+timetableData.push({
+  className: "O Juniors A",
+  schedule: [
+    { day: "Monday", time: "08:00 – 09:30", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
+    { day: "Monday", time: "09:30 – 10:30", subject: "Accounting/Biology", teacher: "Sir Tamhas" },
+    { day: "Monday", time: "10:30 – 11:30", subject: "Break", teacher: "" },
+    { day: "Monday", time: "11:30 – 12:45", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Computer", teacher: "Ms. Kashaf" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Chemistry", teacher: "Ms. Areeba" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Business", teacher: "Sir Tamhas" }
+  ]
+});
 
 // O Juniors B
-timetableData["O Juniors B"] = [
-  {
-    "day": "Monday",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Math", "teacher": "Teacher Supervised Practice" },
-      { "time": "09:00 – 10:00", "subject": "English", "teacher": "" },
-      { "time": "10:00 – 11:00", "subject": "Urdu", "teacher": "" },
-      { "time": "11:00 – 11:30", "subject": "Break", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "Math", "teacher": "Syllabus Coverage" },
-      { "time": "12:45 – 01:45", "subject": "Business/Chemistry/Computer", "teacher": "Ms. Areeba" }
-    ]
-  }
-];
+timetableData.push({
+  className: "O Juniors B",
+  schedule: [
+    { day: "Monday", time: "08:00 – 09:00", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
+    { day: "Monday", time: "09:00 – 10:00", subject: "English", teacher: "Ms. Zoya" },
+    { day: "Monday", time: "10:00 – 11:00", subject: "Urdu", teacher: "Ms. Gulshan" },
+    { day: "Monday", time: "11:00 – 11:30", subject: "Break", teacher: "" },
+    { day: "Monday", time: "11:30 – 12:45", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Chemistry", teacher: "Ms. Areeba" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Business", teacher: "Sir Tamhas" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Computer", teacher: "Ms. Kashaf" }
+  ]
+});
 
 // Pre O
-timetableData["Pre O"] = [
-  {
-    "day": "Monday",
-    "schedule": [
-      { "time": "08:00 – 09:30", "subject": "Islamiat", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Math", "teacher": "" },
-      { "time": "10:30 – 11:00", "subject": "Break", "teacher": "" },
-      { "time": "11:00 – 11:45", "subject": "Business Studies", "teacher": "" },
-      { "time": "11:45 – 12:45", "subject": "English", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "Urdu", "teacher": "" }
-    ]
-  }
-];
+timetableData.push({
+  className: "Pre O",
+  schedule: [
+    { day: "Monday", time: "08:00 – 09:30", subject: "Islamiat", teacher: "Ms. Humaira" },
+    { day: "Monday", time: "09:30 – 10:30", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
+    { day: "Monday", time: "10:30 – 11:00", subject: "Break", teacher: "" },
+    { day: "Monday", time: "11:00 – 11:45", subject: "Business Studies", teacher: "Sir Tamhas" },
+    { day: "Monday", time: "11:45 – 12:45", subject: "English", teacher: "Ms. Kiran Akhtar" },
+    { day: "Monday", time: "12:45 – 01:45", subject: "Urdu", teacher: "Ms. Gulshan" }
+  ]
+});
 
 // O Seniors
-timetableData["O Seniors"] = [
-  {
-    "day": "Irtaza Waqas",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Accounting", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Mahrosh Rizwan",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "English", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Abdul Rehman & Usama",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Business Studies (O Juniors)", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Sumama Qasim",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Accounting", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Mutti Ur Rasool",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Chemistry", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "English (Separate Class)", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Ahmad Asif",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Chemistry", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Muawaz Tariq",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Chemistry", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Abeeha Khurram",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Chemistry", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Zuha Ali",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Chemistry", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Pakistan Studies", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  },
-  {
-    "day": "Taha Zeeshan",
-    "schedule": [
-      { "time": "08:00 – 09:00", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "09:30 – 10:30", "subject": "Chemistry", "teacher": "" },
-      { "time": "10:30 – 11:30", "subject": "Mathematics (O Juniors)", "teacher": "" },
-      { "time": "11:30 – 12:45", "subject": "", "teacher": "" },
-      { "time": "12:45 – 01:45", "subject": "", "teacher": "" }
-    ]
-  }
+const oSeniors = [
+  { className: "Irtaza Waqas (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "", teacher: "" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Accounting", teacher: "Sir Tamhas" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Sir Tamhas" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "", teacher: "" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Mahrosh Rizwan (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "English", teacher: "Ms. Kiran Akhtar" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "", teacher: "" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Abdul Rehman Usama  (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "", teacher: "" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "", teacher: "" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Business Studies (O Juniors)", teacher: "Sir Tamhas" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Sumama Qasim (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Accounting", teacher: "Sir Tamhas" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Mutti Ur Rasool (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "", teacher: "" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Chemistry", teacher: "Ms. Areeba" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "English(Separate Class)", teacher: "Ms. Kiran Akhtar" }
+  ] },
+  { className: "Ahmad Asif (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "", teacher: "" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Chemistry", teacher: "Ms. Areeba" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "English(Separate Class)", teacher: "Ms. Kiran Akhtar" }
+  ] },
+  { className: "Muawaz Tariq (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Chemistry", teacher: "Ms. Areeba" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Abeeha Khurram (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "", teacher: "" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Chemistry", teacher: "Ms. Areeba" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "", teacher: "" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Zuha Ali (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "", teacher: "" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Chemistry", teacher: "Ms. Areeba" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "", teacher: "" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] },
+  { className: "Taha Zeeshan (O Seniors)", schedule: [
+      { day: "Monday", time: "08:00 – 09:00", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "09:30 – 10:30", subject: "Chemistry", teacher: "Ms. Areeba" },
+      { day: "Monday", time: "10:30 – 11:30", subject: "", teacher: "" },
+      { day: "Monday", time: "11:30 – 12:45", subject: "Mathematics (O Juniors)", teacher: "Ms. Zainab & Sir Bilal" },
+      { day: "Monday", time: "12:45 – 01:45", subject: "", teacher: "" }
+  ] }
 ];
 
+// Add each O Senior separately
+oSeniors.forEach(c => timetableData.push(c));

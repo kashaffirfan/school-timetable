@@ -50,7 +50,7 @@ timetableData.push({
   className: "Promoted Students",
   schedule: [
     { day: "Monday", time: "08:00 – 09:15", subject: "English", teacher: "Ms. Zoya" },
-    { day: "Monday", time: "09:15 – 10:30", subject: "Math", teacher: "Sir Bilal & Ms. Zainab" },
+    { day: "Monday", time: "09:15 – 10:30", subject: "Math", teacher: "Ms. Zainab & Sir Bilal" },
     { day: "Monday", time: "10:40 – 11:10", subject: "Break", teacher: "" },
     { day: "Monday", time: "11:10 – 12:30", subject: "Science", teacher: "Ms. Sidra" },
     { day: "Monday", time: "12:30 – 01:45", subject: "Urdu", teacher: "Ms. Palwasha" },
@@ -62,7 +62,8 @@ timetableData.push({
   className: "Level O Juniors (Section A)",
   schedule: [
     { day: "Monday", time: "08:00 – 09:00", subject: "Math", teacher: "" },
-    { day: "Monday", time: "09:00 – 10:00", subject: "Business Studies / Chemistry", teacher: "Sir Tamhas/Ms. Areeba" },
+    { day: "Monday", time: "09:00 – 10:00", subject: "Business Studies", teacher: "Sir Tamhas" },
+    { day: "Monday", time: "09:00 – 10:00", subject: "Chemistry", teacher: "Ms. Areeba" },
     { day: "Monday", time: "10:00 – 12:15", subject: "Urdu, English", teacher: "with Sec B" },
     { day: "Monday", time: "11:15 – 12:15", subject: "Biology", teacher: "" },
     { day: "Monday", time: "12:15 – 01:45", subject: "Math (Syllabus Coverage)", teacher: "Sir Rashid Bashir & Team" }
@@ -74,7 +75,8 @@ timetableData.push({
   className: "Level O Juniors (Section B)",
   schedule: [
     { day: "Monday", time: "08:00 – 09:00", subject: "Math", teacher: "" },
-    { day: "Monday", time: "09:00 – 10:00", subject: "Business Studies / Chemistry", teacher: "Sir Tamhas/Ms. Areeba" },
+    { day: "Monday", time: "09:00 – 10:00", subject: "Business Studies", teacher: "Sir Tamhas" },
+    { day: "Monday", time: "09:00 – 10:00", subject: "Chemistry", teacher: "Ms. Areeba" },
     { day: "Monday", time: "10:00 – 11:00", subject: "English", teacher: "Ms. Kiran Akhtar" },
     { day: "Monday", time: "11:00 – 11:15", subject: "Break", teacher: "" },
     { day: "Monday", time: "11:15 – 12:15", subject: "Urdu", teacher: "Ms. Gulshan" },
@@ -103,7 +105,7 @@ timetableData.push({
     { day: "Monday", time: "8:00-9:15", subject: "English", teacher: "Ms. Atma" },
     { day: "Monday", time: "9:15-10:10", subject: "Urdu", teacher: "Ms. Palwasha" },
     { day: "Monday", time: "10:10-10:30", subject: "Break", teacher: "" },
-    { day: "Monday", time: "10:30-11:30", subject: "Math", teacher: "Ms. Ayesha Ms. Hifza" },
+    { day: "Monday", time: "10:30-11:30", subject: "Math", teacher: "Ms. Ayesha Maryam & Ms. Hifza" },
     { day: "Monday", time: "11:30-12:10", subject: "Quran Class", teacher: "" },
     { day: "Monday", time: "12:15-1:15", subject: "Science", teacher: "Ms. Sidra" },
     { day: "Monday", time: "1:15-1:45", subject: "Tongue training", teacher: "Ms. Zoya" }
@@ -118,7 +120,7 @@ timetableData.push({
     { day: "Monday", time: "9:15-10:30", subject: "English", teacher: "Ms. Zoya" },
     { day: "Monday", time: "10:30-11:00", subject: "Quran Pak class", teacher: "" },
     { day: "Monday", time: "11:00-11:25", subject: "Break", teacher: "" },
-    { day: "Monday", time: "11:25-12:45", subject: "Mathematics", teacher: "Ms. Areeba Ms. Hifza" },
+    { day: "Monday", time: "11:25-12:45", subject: "Mathematics", teacher: "Ms. Areeba & Ms. Hifza" },
     { day: "Monday", time: "12:45-1:45", subject: "Urdu", teacher: "Ms. Palwasha" }
   ]
 });
@@ -142,7 +144,7 @@ timetableData.push({
   schedule: [
     { day: "Monday", time: "8:00-9:00", subject: "Urdu", teacher: "Ms. Nousheen" },
     { day: "Monday", time: "9:00-9:30", subject: "Presentations", teacher: "" },
-    { day: "Monday", time: "9:30-10:30", subject: "Math", teacher: "Ms. Hifza Ms. Nousheen" },
+    { day: "Monday", time: "9:30-10:30", subject: "Math", teacher: "Ms. Hifza & Ms. Nousheen" },
     { day: "Monday", time: "10:30-11:00", subject: "Break", teacher: "" },
     { day: "Monday", time: "11:00-12:00", subject: "English", teacher: "Ms. Atma" },
     { day: "Monday", time: "12:10-12:35", subject: "Quran class", teacher: "" },
@@ -167,7 +169,7 @@ const oSeniors = [
   ] },
   { className: "Sumama Qasim (O Seniors)", schedule: [
       { day: "Monday", time: "08:00 – 09:00", subject: "Mathematics", teacher: "Ms. Zainab & Sir Bilal" },
-      { day: "Monday", time: "10:00 – 11:00", subject: "Pakistan Studies", teacher: "Sir Tamhas" },
+      { day: "Monday", time: "10:00 – 11:00", subject: "Pakistan Studies", teacher: "Ms. Humaira" },
       { day: "Monday", time: "11:15 – 12:15", subject: "Accounting", teacher: "Sir Tamhas" },
       { day: "Monday", time: "12:15 – 01:45", subject: "Mathematics", teacher: "Ms. Zainab & Sir Bilal" }
   ] },

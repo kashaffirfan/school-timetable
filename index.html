@@ -3,51 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>School Timetable System</title>
+  <title>Institute of Dynamic Learning - Timetable System</title>
   <link rel="stylesheet" href="style.css" />
-
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Library for PDF export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 </head>
 <body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="logo.jpg" alt="Institute of Dynamic Learning" class="school-logo" />
+        <div class="school-info">
+          <h1 class="school-name">Institute of Dynamic Learning</h1>
+          <p class="school-tagline">Timetable Management System</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <div class="container">
-  <!-- School Logo -->
-  <div class="logo-container">
-    <img src="logo.jpg" alt="School Logo" class="school-logo" />
+    <!-- Welcome Section -->
+    <section class="welcome-card">
+      <div class="welcome-content">
+        <h2><i class="fas fa-calendar-alt"></i> Welcome to Timetable System</h2>
+        <p>Find teacher locations, view class schedules, and manage timetables efficiently</p>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="main-grid">
+      <!-- Section 1: Teacher Now -->
+      <section class="card teacher-now">
+        <div class="card-header">
+          <i class="fas fa-map-marker-alt"></i>
+          <h2>Teacher Locator</h2>
+        </div>
+        <p class="card-description">Find where a teacher is currently teaching</p>
+        <div class="input-group">
+          <input id="teacherInput" placeholder="Enter teacher name" autocomplete="off"/>
+          <ul id="teacherSuggestions" class="suggestions"></ul>
+        </div>
+        <button id="checkTeacherBtn" class="btn-primary">
+          <i class="fas fa-search"></i> Check Location
+        </button>
+        <div id="result" class="result-box"></div>
+      </section>
+
+      <!-- Section 2: Class Timetable -->
+      <section class="card class-timetable">
+        <div class="card-header">
+          <i class="fas fa-users"></i>
+          <h2>Class Timetable</h2>
+        </div>
+        <p class="card-description">View schedule for any class or student</p>
+        <div class="input-group">
+          <input id="classInput" placeholder="Enter class name or student name" autocomplete="off"/>
+          <ul id="classSuggestions" class="suggestions"></ul>
+        </div>
+        <div class="button-group">
+          <button id="showClassBtn" class="btn-primary">
+            <i class="fas fa-eye"></i> Show Timetable
+          </button>
+          <button id="downloadClassBtn" class="btn-secondary hidden">
+            <i class="fas fa-download"></i> Download PDF
+          </button>
+        </div>
+        <div id="classOutput" class="output-container"></div>
+      </section>
+
+      <!-- Section 3: Teacher Timetable -->
+      <section class="card teacher-timetable">
+        <div class="card-header">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h2>Teacher Schedule</h2>
+        </div>
+        <p class="card-description">View complete timetable for any teacher</p>
+        <div class="input-group">
+          <input id="teacherScheduleInput" placeholder="Enter teacher name" autocomplete="off"/>
+          <ul id="teacherSuggestions2" class="suggestions"></ul>
+        </div>
+        <div class="button-group">
+          <button id="showTeacherBtn" class="btn-primary">
+            <i class="fas fa-eye"></i> Show Schedule
+          </button>
+          <button id="downloadTeacherBtn" class="btn-secondary hidden">
+            <i class="fas fa-download"></i> Download PDF
+          </button>
+        </div>
+        <div id="teacherOutput" class="output-container"></div>
+      </section>
+    </div>
   </div>
 
-  <h1 class="main-heading">School Timetable System</h1>
-
-  <!-- Section 1: Teacher Now -->
-  <section class="card" style="position:relative;">
-    <h2>Where is this teacher right now?</h2>
-    <input id="teacherInput" placeholder="Enter teacher name" autocomplete="off"/>
-    <ul id="teacherSuggestions" class="suggestions"></ul>
-    <button id="checkTeacherBtn">Check</button>
-    <p id="result"></p>
-  </section>
-
-  <!-- Section 2: Class Timetable -->
-  <section class="card" style="position:relative;">
-    <h2>View Class Timetable</h2>
-    <input id="classInput" placeholder="Enter class name or Student Name" autocomplete="off"/>
-    <ul id="classSuggestions" class="suggestions"></ul>
-    <button id="showClassBtn">Show</button>
-    <button id="downloadClassBtn" class="hidden">📄 Download PDF</button>
-    <div id="classOutput"></div>
-  </section>
-
-  <!-- Section 3: Teacher Timetable -->
-  <section class="card" style="position:relative;">
-    <h2>View Teacher Timetable</h2>
-    <input id="teacherScheduleInput" placeholder="Enter teacher name" autocomplete="off"/>
-    <ul id="teacherSuggestions2" class="suggestions"></ul>
-    <button id="showTeacherBtn">Show</button>
-    <button id="downloadTeacherBtn" class="hidden">📄 Download PDF</button>
-    <div id="teacherOutput"></div>
-  </section>
-</div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Institute of Dynamic Learning. All rights reserved.</p>
+      <p class="footer-info">Timetable Management System v2.0</p>
+    </div>
+  </footer>
 
   <!-- Include JS at the end to ensure DOM is loaded -->
   <script src="data.js"></script>

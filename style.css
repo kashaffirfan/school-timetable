@@ -1,84 +1,252 @@
-/* ---------- Body & Global ---------- */
-body {
-  font-family: "Poppins", sans-serif;
-  background: #cfbeff; /* soft light background */
-  color: #333;
+/* ---------- CSS Variables ---------- */
+:root {
+  --primary: #6a11cb;
+  --primary-dark: #4d0896;
+  --primary-light: #8b46e4;
+  --secondary: #2575fc;
+  --accent: #ff6b6b;
+  --success: #4cd964;
+  --warning: #ff9500;
+  --light: #f8f9fa;
+  --dark: #2d3748;
+  --gray: #718096;
+  --light-gray: #e2e8f0;
+  --white: #ffffff;
+  --shadow: 0 10px 25px rgba(0,0,0,0.1);
+  --shadow-hover: 0 15px 35px rgba(0,0,0,0.15);
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+/* ---------- Global Reset & Base Styles ---------- */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #f9faff; /* subtle card background */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: var(--dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ---------- Logo & Header ---------- */
+/* ---------- Header Styles ---------- */
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: var(--white);
+  padding: 1.5rem 0;
+  box-shadow: var(--shadow);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 .logo-container {
-  text-align: center;
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .school-logo {
-  width: 120px;
-  max-width: 30vw;
-  height: auto;
-  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--white);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.main-heading {
+.school-info {
   text-align: center;
-  color: #260046; /* primary dark color */
-  margin-bottom: 25px;
-  font-family: 'Arial', sans-serif;
 }
 
-/* ---------- Cards ---------- */
+.school-name {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.school-tagline {
+  font-weight: 300;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* ---------- Main Container ---------- */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+  flex: 1;
+}
+
+/* ---------- Welcome Card ---------- */
+.welcome-card {
+  background: linear-gradient(135deg, var(--white) 0%, #f8f9fa 100%);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  border-left: 5px solid var(--primary);
+}
+
+.welcome-content h2 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.welcome-content h2 i {
+  margin-right: 10px;
+}
+
+.welcome-content p {
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+/* ---------- Main Grid Layout ---------- */
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* ---------- Card Styles ---------- */
 .card {
-  background: white;
-  padding: 20px;
-  margin-bottom: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border-top: 4px solid transparent;
+  height: fit-content;
 }
 
-.card h2 {
-  color: #35053a; /* secondary blue */
-  margin-bottom: 10px;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
 }
 
-/* ---------- Inputs ---------- */
+.teacher-now {
+  border-top-color: var(--success);
+}
+
+.class-timetable {
+  border-top-color: var(--primary);
+}
+
+.teacher-timetable {
+  border-top-color: var(--secondary);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-header i {
+  font-size: 1.5rem;
+  margin-right: 12px;
+  color: var(--primary);
+}
+
+.card-header h2 {
+  color: var(--dark);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.card-description {
+  color: var(--gray);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Input Groups ---------- */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
 input {
-  padding: 8px 10px;
-  border-radius: 5px;
-  border: 1px solid #cbd5e1;
-  width: 70%;
-  max-width: 300px;
-  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid var(--light-gray);
+  width: 100%;
+  font-size: 1rem;
+  transition: var(--transition);
+  background: var(--light);
 }
 
-/* ---------- Buttons ---------- */
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+}
+
+/* ---------- Button Styles ---------- */
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 button {
-  background: #3f083a;
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
+  border-radius: 8px;
   font-weight: 500;
-  margin-top: 5px;
-  transition: background-color 0.3s;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+  min-width: 140px;
 }
 
-button:hover {
-  background: #6d00ac;
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary) 0%, #4a90e2 100%);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #1a67d8 0%, var(--secondary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 117, 252, 0.3);
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* ---------- Suggestions List ---------- */
@@ -86,90 +254,307 @@ button:hover {
   list-style: none;
   padding: 0;
   margin: 0;
-  border: 1px solid #cbd5e1;
-  max-height: 150px;
+  border: 2px solid var(--light-gray);
+  border-top: none;
+  max-height: 200px;
   overflow-y: auto;
-  width: 70%;
+  width: 100%;
   position: absolute;
-  background: white;
-  z-index: 10;
+  background: var(--white);
+  z-index: 100;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .suggestions li {
-  padding: 8px 10px;
+  padding: 12px 15px;
   cursor: pointer;
+  border-bottom: 1px solid var(--light-gray);
+  transition: var(--transition);
+}
+
+.suggestions li:last-child {
+  border-bottom: none;
 }
 
 .suggestions li:hover {
-  background-color: #e0f2fe;
+  background-color: var(--primary);
+  color: var(--white);
 }
 
 .suggestions li.no-match {
   cursor: default;
-  color: gray;
-  background-color: #f9f9f9;
+  color: var(--gray);
+  background-color: var(--light);
+}
+
+.suggestions li.no-match:hover {
+  background-color: var(--light);
+  color: var(--gray);
+}
+
+/* ---------- Result Box ---------- */
+.result-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: var(--light);
+  border-radius: 8px;
+  border-left: 4px solid var(--success);
+  font-weight: 500;
+}
+
+/* ---------- Output Containers ---------- */
+.output-container {
+  margin-top: 20px;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
 }
 
 /* ---------- Table Styling ---------- */
 .table-container {
   overflow-x: auto;
-  margin-top: 10px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin: 0;
 }
 
 th, td {
-  padding: 8px 10px;
-  border: 1px solid #330d49;
-  text-align: center;
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--light-gray);
 }
 
 th {
-  background-color: #330d49;
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
 }
 
 tr:nth-child(even) {
-  background-color: #f1f5f9;
+  background-color: #f8fafc;
 }
 
 tr:hover {
-  background-color: #e0f2fe;
+  background-color: #e3f2fd;
 }
 
-h3 {
-  margin: 10px 0 5px;
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--dark);
+  color: var(--white);
+  padding: 25px 0;
+  margin-top: auto;
 }
 
-/* ---------- Output Containers ---------- */
-#classOutput, #teacherOutput {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  background-color: white;
-  overflow: visible; /* ensure full table visible in PDF */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
+.footer p {
+  margin-bottom: 5px;
+}
+
+.footer-info {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
   }
-
-  input, button, .suggestions {
-    width: 100%;
-    margin-top: 5px;
+  
+  .logo-container {
+    flex-direction: column;
+    text-align: center;
   }
-
+  
+  .school-name {
+    font-size: 1.5rem;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .card-header i {
+    margin-right: 0;
+  }
+  
+  button {
+    flex: 1 0 100%;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
   th, td {
-    font-size: 14px;
-    padding: 6px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .card {
+    padding: 20px 15px;
+  }
+  
+  .school-name {
+    font-size: 1.3rem;
+  }
+  
+  th, td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  
+  input, button {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- Animation for loading ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.output-container {
+  animation: fadeIn 0.3s ease-out;
+}
+/* ---------- Day Section Styling ---------- */
+.day-section {
+  margin-bottom: 30px;
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.day-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  padding: 15px 20px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.day-header i {
+  font-size: 1.1rem;
+}
+
+.friday-header {
+  background: linear-gradient(135deg, var(--secondary) 0%, #1a67d8 100%);
+}
+
+.friday-header::before {
+  content: "📅";
+  margin-right: 8px;
+}
+
+.day-header::before {
+  content: "📚";
+  margin-right: 8px;
+}
+
+.no-schedule {
+  text-align: center;
+  color: var(--gray);
+  font-style: italic;
+  padding: 20px;
+  background: var(--light);
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* ---------- Table Improvements ---------- */
+.table-container {
+  overflow-x: auto;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+th {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Responsive Table Improvements ---------- */
+@media (max-width: 768px) {
+  .day-header {
+    font-size: 1.1rem;
+    padding: 12px 15px;
+  }
+  
+  th, td {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .table-container {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .day-header {
+    font-size: 1rem;
+    padding: 10px 12px;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+  
+  th, td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+  
+  .no-schedule {
+    padding: 15px;
+    font-size: 0.9rem;
   }
 }

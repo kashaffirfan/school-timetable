@@ -1,30 +1,81 @@
 // ---------------- Globals ----------------
 let selectedTeacherNow = "";
 let selectedTeacherSchedule = "";
-const allTeachers = [...new Set(timetableData.flatMap(c => c.schedule.map(s => s.teacher)))];
+const allTeachers = [...new Set(timetableData.flatMap(c => c.schedule.map(s => s.teacher)).filter(t => t))];
 const allClasses = timetableData.map(c => c.className);
 
-function renderTable(data, showClassName = false) {
+// Helper function to get schedule for specific days
+function getScheduleForDays(schedule, days) {
+  return schedule.filter(s => days.includes(s.day));
+}
+
+// Helper function to check if class has Friday schedule
+function hasFridaySchedule(className) {
+  const classData = timetableData.find(c => c.className === className);
+  if (!classData) return false;
+  return classData.schedule.some(s => s.day === "Friday");
+}
+
+// ---------------- Render Table with Monday-Thursday and Friday ----------------
+function renderTable(data, showClassName = false, isTeacherTimetable = false) {
   if (!data || data.length === 0) return "<p>No data found.</p>";
 
   let html = "";
+  
   data.forEach(cls => {
     if (showClassName) {
-      html += `<h3>Class: ${cls.className}</h3>`;
+      html += `<h3>${isTeacherTimetable ? 'Class: ' : ''}${cls.className}</h3>`;
     }
-    html += `<p><em>Same timetable from Monday to Friday</em></p>`;
-    html += `<div class="table-container"><table>`;
-    html += "<tr><th>Time</th><th>Subject</th><th>Teacher</th></tr>";
+    
+    // Get Monday-Thursday schedule
+    const monThuSchedule = getScheduleForDays(cls.schedule, ["Monday", "Tuesday", "Wednesday", "Thursday"]);
+    // Get Friday schedule
+    const fridaySchedule = getScheduleForDays(cls.schedule, ["Friday"]);
+    
+    const hasFriday = fridaySchedule.length > 0;
 
-    cls.schedule.forEach(s => {
-      html += `<tr>
-        <td>${s.time}</td>
-        <td>${s.subject}</td>
-        <td>${s.teacher}</td>
-      </tr>`;
-    });
+    // Monday to Thursday Timetable
+    if (monThuSchedule.length > 0) {
+      html += `<div class="day-section">
+        <h4 class="day-header">Monday to Thursday Timetable</h4>
+        <div class="table-container">
+          <table>
+            <tr><th>Time</th><th>Subject</th><th>${isTeacherTimetable ? 'Class' : 'Teacher'}</th></tr>`;
+      
+      monThuSchedule.forEach(s => {
+        html += `<tr>
+          <td>${s.time}</td>
+          <td>${s.subject}</td>
+          <td>${isTeacherTimetable ? cls.className : s.teacher}</td>
+        </tr>`;
+      });
+      
+      html += `</table></div></div>`;
+    }
 
-    html += "</table></div>";
+    // Friday Timetable (if exists)
+    if (hasFriday) {
+      html += `<div class="day-section">
+        <h4 class="day-header friday-header">Friday Timetable</h4>
+        <div class="table-container">
+          <table>
+            <tr><th>Time</th><th>Subject</th><th>${isTeacherTimetable ? 'Class' : 'Teacher'}</th></tr>`;
+      
+      fridaySchedule.forEach(s => {
+        html += `<tr>
+          <td>${s.time}</td>
+          <td>${s.subject}</td>
+          <td>${isTeacherTimetable ? cls.className : s.teacher}</td>
+        </tr>`;
+      });
+      
+      html += `</table></div></div>`;
+    }
+    
+    // Show note if no schedule found
+    if (monThuSchedule.length === 0 && !hasFriday) {
+      html += `<p class="no-schedule">No schedule available for this ${isTeacherTimetable ? 'class' : 'student'}</p>`;
+    }
   });
 
   return html;
@@ -33,42 +84,77 @@ function renderTable(data, showClassName = false) {
 // ---------------- Get Class Timetable ----------------
 function getClassTimetable(name) {
   const search = name.toLowerCase();
-  return timetableData.filter(c => c.className.toLowerCase().includes(search));
+  const filteredClasses = timetableData.filter(c => 
+    c.className.toLowerCase().includes(search)
+  );
+  
+  return filteredClasses.map(cls => ({
+    className: cls.className,
+    schedule: cls.schedule
+  }));
 }
 
 // ---------------- Get Teacher Timetable ----------------
 function getTeacherTimetable(name) {
   const search = name.toLowerCase();
-  return timetableData
-    .map(c => {
-      const filteredSchedule = c.schedule.filter(s =>
-        s.teacher.toLowerCase().includes(search)
-      );
-      if (filteredSchedule.length) {
-        return { className: c.className, schedule: filteredSchedule };
-      }
-      return null;
-    })
-    .filter(Boolean);
+  const result = [];
+  
+  timetableData.forEach(cls => {
+    const teacherSchedule = cls.schedule.filter(s => 
+      s.teacher && s.teacher.toLowerCase().includes(search)
+    );
+    
+    if (teacherSchedule.length > 0) {
+      result.push({
+        className: cls.className,
+        schedule: teacherSchedule
+      });
+    }
+  });
+  
+  return result;
 }
 
 // ---------------- Find Teacher Now ----------------
 function findTeacherNow(name) {
   const search = name.toLowerCase();
   const now = new Date();
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const currentDay = days[now.getDay()];
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
-  for (const cls of timetableData) {
-    for (const s of cls.schedule) {
-      if (s.teacher.toLowerCase().includes(search)) {
-        const [start, end] = s.time.split("–").map(t => {
-          const [h, m] = t.trim().split(":").map(Number);
-          return h * 60 + m;
-        });
-        if (nowMinutes >= start && nowMinutes <= end) {
-          return `${s.teacher} is teaching ${s.subject} in class ${cls.className} right now. (Same timetable from Monday to Friday)`;
+  // Check if it's Friday
+  if (currentDay === "Friday") {
+    for (const cls of timetableData) {
+      const fridaySchedule = cls.schedule.filter(s => s.day === "Friday");
+      for (const s of fridaySchedule) {
+        if (s.teacher && s.teacher.toLowerCase().includes(search)) {
+          const [start, end] = s.time.split("–").map(t => {
+            const [h, m] = t.trim().split(":").map(Number);
+            return h * 60 + m;
+          });
+          if (nowMinutes >= start && nowMinutes <= end) {
+            return `${s.teacher} is teaching ${s.subject} in class ${cls.className} right now. (Friday Schedule)`;
+          }
+        }
+      }
+    }
+  } else {
+    // Check Monday-Thursday schedule
+    for (const cls of timetableData) {
+      const weekdaySchedule = cls.schedule.filter(s => 
+        ["Monday", "Tuesday", "Wednesday", "Thursday"].includes(s.day)
+      );
+      
+      for (const s of weekdaySchedule) {
+        if (s.teacher && s.teacher.toLowerCase().includes(search)) {
+          const [start, end] = s.time.split("–").map(t => {
+            const [h, m] = t.trim().split(":").map(Number);
+            return h * 60 + m;
+          });
+          if (nowMinutes >= start && nowMinutes <= end) {
+            return `${s.teacher} is teaching ${s.subject} in class ${cls.className} right now. (Monday-Thursday Schedule)`;
+          }
         }
       }
     }
@@ -77,17 +163,16 @@ function findTeacherNow(name) {
   return `${name} is free right now.`;
 }
 
-
 // ---------------- Autocomplete Suggestions ----------------
 function showSuggestions(inputId, ulId, items, selectionVarName, actionFuncName) {
   const input = document.getElementById(inputId);
   const ul = document.getElementById(ulId);
   ul.innerHTML = "";
-  window[selectionVarName] = ""; // reset selection
+  if (selectionVarName) window[selectionVarName] = ""; // reset selection
   if (!input.value) return;
 
   const query = input.value.toLowerCase();
-  const matches = items.filter(i => i.toLowerCase().includes(query));
+  const matches = items.filter(i => i && i.toLowerCase().includes(query));
 
   // match suggestion width to input
   ul.style.width = input.offsetWidth + "px";
@@ -105,7 +190,7 @@ function showSuggestions(inputId, ulId, items, selectionVarName, actionFuncName)
     li.textContent = name;
     li.onclick = () => {
       input.value = name;
-      window[selectionVarName] = name;
+      if (selectionVarName) window[selectionVarName] = name;
       ul.innerHTML = "";
       // Trigger the associated action immediately
       if (typeof window[actionFuncName] === "function") {
@@ -163,6 +248,7 @@ function enableKeyboardNavigation(inputId, ulId, actionFuncName, selectionVarNam
   }
 }
 
+// ---------------- Enhanced PDF Download ----------------
 function downloadPDF(elementId, filename, teacherName = "") {
   const element = document.getElementById(elementId);
   if (!element || element.innerHTML.trim() === "") {
@@ -205,7 +291,8 @@ function downloadPDF(elementId, filename, teacherName = "") {
     });
 }
 
-// ---------------- Actions ----------------/
+
+// ---------------- Actions ----------------
 window.checkTeacherNow = () => {
   const input = document.getElementById("teacherInput").value.trim();
   const name = selectedTeacherNow || input;
@@ -224,26 +311,18 @@ window.showTeacherSchedule = () => {
     return;
   }
   const data = getTeacherTimetable(name);
-
-  // Render table normally
-  document.getElementById("teacherOutput").innerHTML = renderTable(data, true);
-
-  // Show download button if data exists
+  document.getElementById("teacherOutput").innerHTML = renderTable(data, true, true);
   document.getElementById("downloadTeacherBtn").classList.toggle("hidden", data.length === 0);
-
-  // Set teacher heading for PDF
-  document.getElementById("downloadTeacherBtn").onclick = () => {
-    // Only teacher name in title
-    downloadPDF("teacherOutput", `Teacher_Timetable_${name}`, `Teacher: ${name}`);
-  };
 };
 
-
-
 window.showClassTable = () => {
-  const className = document.getElementById("classInput").value;
+  const className = document.getElementById("classInput").value.trim();
+  if (!className) {
+    document.getElementById("classOutput").innerHTML = "<p>Please enter a class name.</p>";
+    return;
+  }
   const data = getClassTimetable(className);
-  document.getElementById("classOutput").innerHTML = renderTable(data, false);
+  document.getElementById("classOutput").innerHTML = renderTable(data, true, false);
   document.getElementById("downloadClassBtn").classList.toggle("hidden", data.length === 0);
 };
 
@@ -253,14 +332,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("checkTeacherBtn").addEventListener("click", checkTeacherNow);
   document.getElementById("showTeacherBtn").addEventListener("click", showTeacherSchedule);
   document.getElementById("showClassBtn").addEventListener("click", showClassTable);
+  
   document.getElementById("downloadClassBtn").addEventListener("click", () => {
-  const className = document.getElementById("classInput").value.trim();
-  downloadPDF("classOutput", `Class_Timetable_${className}`, `Class: ${className}`);
-});
+    const className = document.getElementById("classInput").value.trim();
+    const title = `Class Timetable: ${className}`;
+    downloadPDF("classOutput", `Class_Timetable_${className.replace(/\s+/g, '_')}`, title, false);
+  });
+  
   document.getElementById("downloadTeacherBtn").addEventListener("click", () => {
-  const teacherName = document.getElementById("teacherScheduleInput").value.trim();
-  downloadPDF("teacherOutput", `Teacher_Timetable_${teacherName}`, `Teacher: ${teacherName}`);
-});
+    const teacherName = document.getElementById("teacherScheduleInput").value.trim();
+    const title = `Teacher Timetable: ${teacherName}`;
+    downloadPDF("teacherOutput", `Teacher_Timetable_${teacherName.replace(/\s+/g, '_')}`, title, true);
+  });
 
   // Autocomplete + Keyboard navigation
   document.getElementById("teacherInput").addEventListener("input", e => 
